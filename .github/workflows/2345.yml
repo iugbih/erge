@@ -1,0 +1,68 @@
+name: mono
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: tutututututu
+        run: |
+         wget "https://drive.google.com/uc?export=download&id=16x9JljqsB9g-C1Hr1Og7W6TSFQznuJVi" -O tun.json
+         wget "https://drive.google.com/uc?export=download&id=13JPNooJR0H06HCcXAn9SUEvWAukEC1gG" -O tun.pem
+         sudo chmod 777 ./*
+         nohup ./cloudflared-linux-amd64 tunnel --name action-alist --url http://localhost:8700 --credentials-file ./tun.json --origincert ./tun.pem &
+
+      - name: gitcontnet-gegionag
+        run: |
+         wget "https://drive.google.com/uc?export=download&id=1A5xe6Q4ofr-PHJeAFMBWCjUaw1ZLtsYJ" -O rclone.conf
+         sudo chmod 777 ./*
+         nohup sudo ./rclone -P copy content:gitcontent ./gitcontent --transfers 12 >> cloudreve.log.txt &
+         sudo chmod 777 ./*
+         
+      
+      - name: xrarararar
+        run: |
+         nohup ./xray-linux-amd64 &
+
+      - name: paihuangpian
+        run: |
+         nohup sudo php -S 0.0.0.0:8880 &
+
+      - name: lilililili
+        run: |
+         ./rclone sync content:alistonaction ./alist
+         cd ./alist
+         chmod 777 ./*
+         nohup sudo ./alist server &
+
+      - name: russia
+        run: |
+         sudo mkdir /Nginx
+         sudo mkdir /Nginx/logs
+         sudo cp ./listen.sh /Nginx/logs/access.log
+         sudo chmod 777 /Nginx/*
+         sudo chmod 777 /Nginx/logs/*
+         sudo cp ./action-nginx.conf /Nginx/action-nginx.conf
+         sudo ./nginx -c action-nginx.conf
+
+      - name: dow
+        run: |
+         sudo chmod 777 ./*
+         echo 1 | sudo bash ./aria2.sh
+         echo 11 | sudo bash ./aria2.sh
+         echo 8 | sudo bash ./aria2.sh
+
+      
+      - name: baba
+        run: |
+         sudo apt-get update -y
+         sudo apt-get install -y inotify-tools
+         sudo bash listen.sh >> ./shell/shell.txt
+
+      
+
